@@ -1,0 +1,367 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 215 100% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* AOS animations custom duration */
+    --aos-duration: 800ms;
+    --aos-delay: 200ms;
+  }
+  
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-size: 15px; /* Slightly smaller than default 16px to simulate 90% zoom */
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-medium tracking-tight;
+    line-height: 1.2;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg rounded-2xl transition-all duration-300;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .btn-primary {
+    @apply px-5 py-2.5 md:px-6 md:py-3 bg-pppi-blue text-white rounded-full font-medium shadow-md hover:shadow-lg transform transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .nav-link {
+    @apply relative px-2 py-1.5 md:px-3 md:py-2 font-medium text-pppi-darkgray transition-colors duration-300 hover:text-pppi-blue;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute w-0 h-0.5 bg-pppi-blue left-1/2 -translate-x-1/2 bottom-0 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .nav-link.active {
+    @apply text-pppi-blue;
+  }
+
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  .section-container {
+    @apply container mx-auto py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-8;
+    max-width: 1400px; /* Limit max width on very large screens */
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-pppi-blue to-pppi-lightblue bg-clip-text text-transparent;
+  }
+  
+  .img-hover-zoom {
+    @apply overflow-hidden rounded-xl;
+  }
+  
+  .img-hover-zoom img {
+    @apply transition-transform duration-500 ease-in-out hover:scale-110;
+  }
+  
+  .card-shadow {
+    @apply shadow-[0_8px_30px_rgb(0,0,0,0.07)];
+  }
+
+  /* Video container for responsive videos - Improved */
+  .video-container {
+    @apply relative overflow-hidden bg-gray-900;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+  }
+  
+  .video-container video, 
+  .video-container iframe {
+    @apply absolute top-0 left-0 w-full h-full;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  /* Hide scrollbar for sponsor carousel */
+  .scrollbar-none {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* Improved loading animation */
+  .loading-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Improved video placeholder */
+  .video-placeholder {
+    @apply absolute inset-0 bg-gray-900 flex items-center justify-center;
+    transition: opacity 0.4s ease-out;
+  }
+  
+  /* Cards with tighter spacing */
+  .tight-card {
+    @apply px-3 py-3 md:px-4 md:py-4;
+  }
+  
+  /* Tighter section spacing */
+  .tight-section {
+    @apply py-8 md:py-12;
+  }
+  
+  /* Compact text - reduced line height for more compact appearance */
+  .compact-text {
+    @apply leading-snug;
+  }
+
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation delays for staggered animations */
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+.delay-400 {
+  animation-delay: 400ms;
+}
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Loading animation for content */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Remove default padding from App.css */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+/* Media Queries for tighter spacing on various screen sizes */
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .section-container {
+    @apply py-14;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 16px;
+  }
+  
+  .tight-section {
+    @apply py-10 md:py-14;
+  }
+}
+
+@media (min-width: 1536px) {
+  .section-container {
+    @apply py-16 md:py-20;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+}
+
+/* Optimized scroll-to-top animation */
+.scroll-to-top {
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px);
+}

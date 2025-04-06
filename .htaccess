@@ -1,0 +1,47 @@
+# ✅ Routing untuk React (Vite + BrowserRouter)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# ✅ Caching untuk gambar (hemat bandwidth)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/gif "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+
+  <FilesMatch "\.(JPG)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+</IfModule>
+
+# ❌ Blokir bot-bot nakal berdasarkan User-Agent
+SetEnvIfNoCase User-Agent "AhrefsBot" bad_bot
+SetEnvIfNoCase User-Agent "SemrushBot" bad_bot
+SetEnvIfNoCase User-Agent "MJ12bot" bad_bot
+SetEnvIfNoCase User-Agent "YandexBot" bad_bot
+SetEnvIfNoCase User-Agent "DotBot" bad_bot
+SetEnvIfNoCase User-Agent "Baiduspider" bad_bot
+SetEnvIfNoCase User-Agent "PetalBot" bad_bot
+SetEnvIfNoCase User-Agent "Sogou" bad_bot
+SetEnvIfNoCase User-Agent "Crawler" bad_bot
+SetEnvIfNoCase User-Agent "SpamBot" bad_bot
+SetEnvIfNoCase User-Agent "python-requests" bad_bot
+SetEnvIfNoCase User-Agent "Java" bad_bot
+SetEnvIfNoCase User-Agent "libwww" bad_bot
+SetEnvIfNoCase User-Agent "curl" bad_bot
+SetEnvIfNoCase User-Agent "wget" bad_bot
+SetEnvIfNoCase User-Agent "node-fetch" bad_bot
+
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
